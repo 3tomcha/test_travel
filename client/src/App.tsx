@@ -16,8 +16,9 @@ class App extends Component {
       const accounts = await web3.eth.getAccounts();
 
       // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const networkId: string = await web3.eth.net.getId();
+      const networks: object = SimpleStorageContract.networks;
+      const deployedNetwork = (networks as any)[networkId];
       const instance = new web3.eth.Contract(
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
@@ -39,10 +40,10 @@ class App extends Component {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    await (contract as any).methods.set(5).send({ from: (accounts as any)[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    const response = await (contract as any).methods.get().call();
 
     // Update state with the result.
     this.setState({ storageValue: response });
