@@ -1,7 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
-
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import Home from './Home';
+import HotelList from './Hotellist';
 import "./App.css";
 
 const App = () => {
@@ -46,19 +48,10 @@ const App = () => {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-      <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 40</strong> of App.js.
-        </p>
-        <div>The stored value is: {storageValue}</div>
-      </div>
+      <Router>
+        <Route path="/" exact component={Home}/>
+        <Route path="/hotellist" exact component={HotelList}/>
+      </Router>
     );
 }
 
