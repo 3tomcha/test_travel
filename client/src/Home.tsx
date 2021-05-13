@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Header from './components/Header';
+import Searchform from './components/Searchform';
 
 const Home = () => {
     return (
@@ -9,7 +10,7 @@ const Home = () => {
                 <Col><Header/></Col>
             </Row>
             <Row>
-                <Col></Col>
+                <Col><Searchform/></Col>
             </Row>
             <Row>
                 <Col></Col>
