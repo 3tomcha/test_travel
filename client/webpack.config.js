@@ -1,6 +1,7 @@
 var path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -74,6 +75,7 @@ module.exports = {
             process: 'process/browser',
             Buffer: ['buffer', 'Buffer'],
         }),
+        new Dotenv({ systemvars: true})
     ],
     devServer: {
         contentBase: path.join(__dirname, 'public'),
