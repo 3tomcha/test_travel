@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, Suspense } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
@@ -50,7 +50,7 @@ const App = () => {
     return (
       <Router>
         <Route path="/" exact component={Home}/>
-        <Route path="/hotellist" exact component={HotelList}/>
+        <Route path="/hotellist" component={HotelList}/>
       </Router>
     );
 }

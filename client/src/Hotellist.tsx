@@ -1,56 +1,29 @@
-import React, { useDebugValue } from 'react';
-const applicationID = process.env.applicationID;
-const url = `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=${applicationID}&format=json&largeClassCode=japan&middleClassCode=akita&smallClassCode=tazawa&checkinDate=2021-12-01&checkoutDate=2021-12-02&adultNum=2`;
-
-type Hotels = {
-    pagingInfo: Object,
-    hotels: Hotel[]
-}
-
-type Hotel = {
-    hotel: HotelBasic[]
-}
-
-type HotelBasic = {
-    hotelBasicInfo: HotelBasicInfo,
-    roomInfo: RoomInfo,
-}
-
-type HotelBasicInfo = {
-    [key: string]: Number | String
-}
-type RoomInfo = {
-    [key: string]: Number | String
-}
-
-
-let hotelData: Hotels[] = [];
-
+import React, { useEffect, useState } from 'react';
+var applicationID = process.env.applicationID;
+var url = `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=${applicationID}&format=json&largeClassCode=japan&middleClassCode=akita&smallClassCode=tazawa&checkinDate=2021-12-01&checkoutDate=2021-12-02&adultNum=2`;
 
 const HotelList = () => {
-    const HotelInfo = () => {
-        return (
-            <div>aaa</div>
-        );
-    }
-    // const hotelInfo = () => fetch(url).then(data => {
-    //     const temp: any = data.json();
-    //     hotelData = temp.hotels; // `data.json()` の呼び出しで解釈された JSON データ
-    //     console.log(hotelData);
-    //     return hotelData.map(hotels => {
-    //         useDebugValue(hotels);
-    //         return 'aaa';
-    //         // hotels.hotels.map(hotel => {
-    //         //     hotel.hotel.map((key, value) => {
-    //         //         console.log(value);
-    //         //         {key}{value}
-    //         //     })  
-    //         // });
-    //     });
-    // });
-                        
+    const [hotelName, setHotelName] = useState('');
+    useEffect(() => {
+        const f = async () => {
+            try {
+                const response = await fetch(url);
+                const json = await response.json();
+                const hotelss: any = await json.hotels;
+                hotelss.map((hotels: any) => {
+                    setHotelName(hotels.hotel[0].hotelBasicInfo.hotelName);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        f();
+    });
+
     return (
-        <div><HotelInfo/></div>
+        <div>
+            {hotelName}
+        </div>
     );
 };
 
