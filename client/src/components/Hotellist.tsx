@@ -8,18 +8,21 @@ const HotelList = () => {
     const [hotelsJson, setHotelsJson] = useState([]);
 
     useEffect(() => {
-        const f = async () => {
+        let isMounted = true;
+        (async () => {
             try {
-                const response = await fetch(url);
-                const json = await response.json();
-                const hotelsJson = await json.hotels;
-                setHotelsJson(hotelsJson);
+                if (isMounted) {
+                    const response = await fetch(url);
+                    const json = await response.json();
+                    const hotelsJson = await json.hotels;
+                    setHotelsJson(hotelsJson);
+                }
             } catch (error) {
                 console.log(error);
             }
-        };
-        f();
-    });
+        })();
+        return () => {isMounted = false};
+    }, []);
 
     return <Hotels hotelsJson={hotelsJson}/>;
 };
