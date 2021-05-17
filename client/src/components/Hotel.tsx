@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Button } from 'react-bootstrap';
-import '../css/hotel.css';
+import styles from '../css/hotel.css';
 
 type HotelProps = {
     name: string
@@ -10,7 +10,7 @@ type HotelProps = {
 }
 const Hotel = (props: HotelProps) => {
     return (
-        <div>
+        <div className={styles.hotel}>
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <Card.Text>{props.special}</Card.Text>

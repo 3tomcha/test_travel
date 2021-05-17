@@ -7,7 +7,7 @@ type HotelProps = {
 const Hotels = (props: HotelProps) => {
     try {  
         if (!props.hotelsJson) {
-            return 'nothing';
+            return 'ホテルが見つかりませんでした';
         }
         return props.hotelsJson.map((hotels: any, index: number) => 
             <Hotel name={hotels.hotel[0].hotelBasicInfo.hotelName}
