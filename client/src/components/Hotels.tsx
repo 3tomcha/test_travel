@@ -14,6 +14,7 @@ const Hotels = (props: HotelProps) => {
                 special={hotels.hotel[0].hotelBasicInfo.hotelSpecial}
                 minCharge={hotels.hotel[0].hotelBasicInfo.hotelMinCharge}
                 reviewAverage={hotels.hotel[0].hotelBasicInfo.reviewAverage}
+                image={hotels.hotel[0].hotelBasicInfo.hotelImageUrl}
                 key={index}/> 
         );   
     } catch (error) {

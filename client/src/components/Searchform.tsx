@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Card, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
-import DatePicker from 'react-date-picker';
-
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
 
 const Searchform = () => {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const [startDate, setStartDate] = useState<Date | Date[]>(today);
-    const [endDate, setEndDate] = useState<Date | Date[]>(tomorrow);
+    const [startDate, setStartDate] = useState<Date | null>(today);
+    const [endDate, setEndDate] = useState<Date | null>(tomorrow);
     return (
         <div>
             <Card>
@@ -25,13 +25,13 @@ const Searchform = () => {
                         チェックイン日
                     </Card.Header>
                     <Card.Body>
-                        <DatePicker value={startDate} onChange={(date: Date | Date[]) => setStartDate(date)}/>
+                        <DatePicker selected={startDate} onChange={(date: Date | null) => setStartDate(date)}/>
                     </Card.Body>
                     <Card.Header>
                         チェックアウト日
                     </Card.Header>
                     <Card.Body>
-                        <DatePicker value={endDate} onChange={(date: Date | Date[]) => setEndDate(date)}/>
+                        <DatePicker selected={endDate} onChange={(date: Date | null) => setEndDate(date)}/>
                     </Card.Body>
                 </form>
             </Card>
