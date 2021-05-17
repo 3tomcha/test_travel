@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import Header from './components/Header';
-import Searchform from './components/Searchform';
+import Header from './Header';
+import Searchform from './Searchform';
 
 const Home = () => {
     return (

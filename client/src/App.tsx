@@ -2,8 +2,8 @@ import React, { Component, useEffect, useState, Suspense } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import Home from './Home';
-import HotelList from './Hotellist';
+import Home from './components/Home';
+import HotelList from './components/Hotellist';
 import "./App.css";
 
 const App = () => {
