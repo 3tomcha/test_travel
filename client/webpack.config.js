@@ -48,7 +48,8 @@ module.exports = {
             },
         },
         {
-            test: /\.(css|scss)$/,
+            test: /\.(css)$/,
+            exclude: /node_modules\/bootstrap/,
             use: [
             {
                 loader: 'style-loader',
@@ -57,9 +58,21 @@ module.exports = {
                 loader: 'css-loader',
                 options: {
                     modules: {
-                        localIdentName: '[name]__[local]___[hash:base64:5]'
+                        localIdentName: '[name]__[local]___[hash:base64:5]',
                     }
                 }
+            },
+            ],
+        },
+        {
+            test: /\.(css)$/,
+            include: /node_modules\/bootstrap/,
+            use: [
+            {
+                loader: 'style-loader',
+            },
+            {
+                loader: 'css-loader',
             },
             ],
         },

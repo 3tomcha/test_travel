@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.tsx';
 import * as serviceWorker from './serviceWorker';
 import 'babel-polyfill';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
