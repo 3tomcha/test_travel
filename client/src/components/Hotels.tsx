@@ -5,8 +5,8 @@ type HotelProps = {
     hotelsJson: any
 }
 const Hotels = (props: HotelProps) => {
-    return props.hotelsJson.map((hotels: any) => 
-       <Hotel name={hotels.hotel[0].hotelBasicInfo.hotelName} /> 
+    return props.hotelsJson.map((hotels: any, index: number) => 
+       <Hotel name={hotels.hotel[0].hotelBasicInfo.hotelName} key={index}/> 
     );
 };
 
