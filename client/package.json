@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "npx webpack",
-    "watch": "npx webpack serve"
+    "watch": "npx webpack serve",
+    "test": "jest"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
@@ -33,13 +34,20 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.13.13",
+    "@types/enzyme": "^3.10.8",
+    "@types/jest": "^26.0.23",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
     "babel-polyfill": "^6.26.0",
     "css-loader": "^5.2.4",
     "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^26.6.0",
     "stream-browserify": "^3.0.0",
     "style-loader": "^2.0.0",
+    "ts-jest": "^26.5.6",
     "xhr2-cookies": "^1.1.0"
   }
 }
