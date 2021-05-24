@@ -9,12 +9,12 @@ test('適切に取得できるか', async() => {
 
 test('JSONから緯度が取得できるか', async() => {
     const geoCode = await fetchGeoCode('東京都新宿区荒木町');
-    const coordinates = getlongitudeFromJSON(geoCode);
-    expect(coordinates).toStrictEqual("139.72353351");
+    const latitude = getlongitudeFromJSON(geoCode);
+    expect(latitude).toStrictEqual("35.68985755");
 });
 
 test('JSONから緯度が取得できるか', async() => {
     const geoCode = await fetchGeoCode('東京都新宿区荒木町');
-    const coordinates = getlatitudeFromJSON(geoCode);
-    expect(coordinates).toStrictEqual("35.68985755");
+    const longitude = getlatitudeFromJSON(geoCode);
+    expect(longitude).toStrictEqual("139.72353351");
 });
