@@ -21,21 +21,11 @@ type Hotel = {
 const HotelList = (props: Props) => {
     const [hotelsJson, setHotelsJson] = useState({});
 
-    useEffect(() => {
-        let isMounted = true;
-        (async () => {
-            try {
-                if (isMounted) {
-                    const hotelsJson: Hotel[] = await fetchHotelsJson(props);
-                    setHotelsJson(hotelsJson);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-        return () => {isMounted = false};
-    }, []);
-
+    (async() => {
+        const hotelsJson: Hotel[] = await fetchHotelsJson(props);
+        setHotelsJson(hotelsJson);
+    })();
+    
     return <Hotels hotelsJson={hotelsJson}/>;
 };
 

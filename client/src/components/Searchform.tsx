@@ -2,9 +2,8 @@ import React, { useState, FormEvent, ChangeEventHandler } from 'react';
 import { Card, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
-var applicationID = process.env.applicationID;
 import { fetchGeoCode, getlatitudeFromJSON, getlongitudeFromJSON } from '../utils/fetchGeoCode'; 
-// var url = `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=${applicationID}&format=json&largeClassCode=japan&middleClassCode=akita&smallClassCode=tazawa&checkinDate=2021-12-01&checkoutDate=2021-12-02&adultNum=2`;
+
 
 type Props = {
     checkinDate: Date | null,
@@ -13,7 +12,6 @@ type Props = {
     handleCheckoutDateChange: Function,
     handleAddressChange: Function
 };
-
 
 export const formatDate = (date: Date | null): string => {
     const today = new Date();
@@ -36,30 +34,16 @@ const Searchform = (props: Props) => {
     const handleEndDateChange = props.handleCheckoutDateChange;
 
     // state自体は親にセットするが、細かい処理は子に書いてみる
-    const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const target: HTMLInputElement = e.target;
-        const address = target.value;
+    // form上の住所を変えるたびに座標がセットされる
+    const handleAddressChange = async(e: any) => {
+        const address = e.target.value;
         // 住所を緯度経度に変更する
-        const json = fetchGeoCode(address);
+        const json = await fetchGeoCode(address);
         const latitude = getlatitudeFromJSON(json);
         const longitude = getlongitudeFromJSON(json);
         // 親の関数を使って、親のstateを更新
         props.handleAddressChange({latitude: latitude, longitude: longitude});
     }
-        
-
-    const search = (e: FormEvent) => {
-        e.preventDefault();
-        let url = new URL('https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426');
-        let searchParams = new URLSearchParams();
-        // 基本的にはapplicationIdは入っていると考える。必要に応じてエラー処理を加える
-        searchParams.append('applicationId', applicationID || '112111');
-        searchParams.append('checkinDate', formatDate(startDate));
-        searchParams.append('checkoutDate', formatDate(endDate));
-        url.search = searchParams.toString();
-        console.log(url.href);
-    };
-
 
     return (
         <div>
@@ -70,24 +54,21 @@ const Searchform = (props: Props) => {
                     </Card.Header>
                     <Card.Body>
                         <InputGroup>
-                            <FormControl placeholder="東京都千代田区丸の内1丁目" onChange={handleAddressChange}></FormControl>
+                            <FormControl placeholder="東京都千代田区丸の内1丁目" onChange={(e) => handleAddressChange(e)}></FormControl>
                         </InputGroup>
                     </Card.Body>
                     <Card.Header>
                         チェックイン日
                     </Card.Header>
                     <Card.Body>
-                        <DatePicker selected={startDate} onChange={(date: Date | null) => handleStartDateChange}/>
+                        <DatePicker selected={startDate} onChange={(date: Date | null) => handleStartDateChange(date)}/>
                     </Card.Body>
                     <Card.Header>
                         チェックアウト日
                     </Card.Header>
                     <Card.Body>
-                        <DatePicker selected={endDate} onChange={(date: Date | null) => handleEndDateChange}/>
+                        <DatePicker selected={endDate} onChange={(date: Date | null) => handleEndDateChange(date)}/>
                     </Card.Body>
-                    <button onClick={(e) => search(e)}>
-                        検索する
-                    </button>
                 </form>
             </Card>
         </div>
