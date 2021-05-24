@@ -14,11 +14,11 @@ export const fetchGeoCode = async(address: string) => {
     }
 };
 
-export const getlongitudeFromJSON = (json: any): String[] => {
-    return json.Feature[0].Geometry.Coordinates.split(',')[1];
+export const getlongitudeFromJSON = (json: any): Number => {
+    return json.Feature[0].Geometry.Coordinates.split(',')[0];
 };
 
-export const getlatitudeFromJSON = (json: any): String[] => {
-    return json.Feature[0].Geometry.Coordinates.split(',')[0];
+export const getlatitudeFromJSON = (json: any): Number => {
+    return json.Feature[0].Geometry.Coordinates.split(',')[1];
 };
 
