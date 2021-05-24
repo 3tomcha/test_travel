@@ -1,20 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import { fetchHotelsJson } from '../utils/fetchHotelsJson';
 import Hotels from './Hotels';
-var applicationID = process.env.applicationID;
-var url = `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=${applicationID}&format=json&largeClassCode=japan&middleClassCode=akita&smallClassCode=tazawa&checkinDate=2021-12-01&checkoutDate=2021-12-02&adultNum=2`;
 
+export type Props = {
+    coordinates: Coordinates,
+    checkinDate: Date | null,
+    checkoutDate: Date | null
+};
 
-const HotelList = () => {
-    const [hotelsJson, setHotelsJson] = useState([]);
+export type Coordinates = {
+    latitude: number, 
+    longitude: number,
+}
+
+type Hotel = {
+    hotel: object[]
+}
+
+// 緯度経度を元に、ホテル情報を検索し、結果を表示する
+const HotelList = (props: Props) => {
+    const [hotelsJson, setHotelsJson] = useState({});
 
     useEffect(() => {
         let isMounted = true;
         (async () => {
             try {
                 if (isMounted) {
-                    const response = await fetch(url);
-                    const json = await response.json();
-                    const hotelsJson = await json.hotels;
+                    const hotelsJson: Hotel[] = await fetchHotelsJson(props);
                     setHotelsJson(hotelsJson);
                 }
             } catch (error) {

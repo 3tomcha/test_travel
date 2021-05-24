@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Home from './components/Home';
 import HotelList from './components/Hotellist';
 import "./App.css";
+import Searchform from "./components/Searchform";
 
 const App = () => {
   const [ storageValue, setStorageValue ] = useState(0);
